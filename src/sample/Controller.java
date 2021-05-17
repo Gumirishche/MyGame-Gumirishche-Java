@@ -110,14 +110,12 @@ public class Controller {
                 }
             }
         });
-
-    }
-
-    public GridPane getGridPane() {
-        return gridPane;
-    }
-
-    public void setGridPane(GridPane gridPane) {
-        this.gridPane = gridPane;
+        for(int i=0;i!=8;i++){
+            for (int j=0;j!=8;j++){
+                gridPane.add(new ImageView(new Image("File:pic/Moon.png")),i,j);
+            }
+        }
+        gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")),7,0);
+        gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")),0,7);
     }
 }

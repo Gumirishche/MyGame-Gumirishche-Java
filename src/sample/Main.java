@@ -7,13 +7,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    public static Stage stage=new Stage();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Moon Drivers");
-        primaryStage.setScene(new Scene(root, 700, 400));
-        primaryStage.show();
+        Parent root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
+        stage.setTitle("Moon Drivers");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
 

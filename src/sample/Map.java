@@ -7,7 +7,7 @@ import javafx.scene.layout.GridPane;
 import java.awt.*;
 
 public class Map extends Rectangle {
-    GridPane gridPane=new Controller().getGridPane();
+    GridPane gridPane;
     public Cell moonRider1=Cell.R1;
     public Cell moonRider2=Cell.A8;
     String direction;
