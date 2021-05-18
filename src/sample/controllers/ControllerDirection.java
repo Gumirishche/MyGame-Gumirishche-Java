@@ -2,12 +2,16 @@ package sample.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
+import sample.actions.Move;
+import sample.actions.Shoot;
 
 public class ControllerDirection {
-    public static String direction="";
+    public static String direction = "";
 
     @FXML
     private ResourceBundle resources;
@@ -36,23 +40,43 @@ public class ControllerDirection {
     @FXML
     void initialize() {
         DirectionBackButton.setOnAction(actionEvent -> {
-            Controller.stage.close();
+            if (Controller.d == 1) {
+                Shoot.stage.close();
+            } else {
+                Move.stage.close();
+            }
         });
         DirectionUpButton.setOnAction(actionEvent -> {
-            direction="up";
-            Controller.stage.close();
+            direction = "up";
+            if (Controller.d == 1) {
+                Shoot.stage.close();
+            } else {
+                Move.stage.close();
+            }
         });
         DirectionDownButton.setOnAction(actionEvent -> {
-            direction="down";
-            Controller.stage.close();
+            direction = "down";
+            if (Controller.d == 1) {
+                Shoot.stage.close();
+            } else {
+                Move.stage.close();
+            }
         });
         DirectionLeftButton.setOnAction(actionEvent -> {
-            direction="left";
-            Controller.stage.close();
+            direction = "left";
+            if (Controller.d == 1) {
+                Shoot.stage.close();
+            } else {
+                Move.stage.close();
+            }
         });
         DirectionRightButton.setOnAction(actionEvent -> {
-            direction="right";
-            Controller.stage.close();
+            direction = "right";
+            if (Controller.d == 1) {
+                Shoot.stage.close();
+            } else {
+                Move.stage.close();
+            }
         });
     }
 

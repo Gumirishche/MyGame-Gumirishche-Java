@@ -10,12 +10,12 @@ public class Server {
     public int portHost;
     /**
      *
-     * @param args
+     //* @param args
      * @throws InterruptedException
      */
     //public static void main(String[] args) throws InterruptedException {
 //  стартуем сервер на порту 3345
-    public Server(String args){
+    public Server(){
         try (ServerSocket server= new ServerSocket(portHost)){
 // становимся в ожидание подключения к сокету под именем - "client" на серверной стороне
             Socket client = server.accept();

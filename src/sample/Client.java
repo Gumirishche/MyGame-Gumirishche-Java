@@ -14,7 +14,7 @@ public class Client {
     //public static void main(String[] args) throws InterruptedException {
     public Client(){
 
-        try (FileReader reader = new FileReader("saved\\playerTwoHostPort.txt")) {
+        try (FileReader reader = new FileReader("saves\\playerTwoHostPort.txt")) {
             // читаем посимвольно
             int c1;
             while ((c1 = reader.read()) != -1) {
@@ -23,9 +23,9 @@ public class Client {
             }
         }
 
-        catch(IOException exept){
+        catch(IOException e){
 
-            System.out.println(exept.getMessage());
+            System.out.println(e.getMessage());
         }
 
 // запускаем подключение сокета по известным координатам и нициализируем приём сообщений с консоли клиента
@@ -53,7 +53,7 @@ public class Client {
 // пишем данные с консоли в канал сокета для сервера
                     oos.writeUTF(clientCommand);
                     oos.flush();
-                    System.out.println("Clien sent message " + clientCommand + " to server.");
+                    System.out.println("Client sent message " + clientCommand + " to server.");
                     Thread.sleep(1000);
 // ждём чтобы сервер успел прочесть сообщение из сокета и ответить
 

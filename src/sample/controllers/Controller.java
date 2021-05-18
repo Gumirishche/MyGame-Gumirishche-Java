@@ -1,29 +1,35 @@
 package sample.controllers;
 
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import sample.Cell;
-import sample.Walls;
+import sample.events.Points;
+import sample.events.Walls;
+import sample.actions.Move;
+import sample.actions.Shoot;
+
+import javax.swing.*;
 
 public class Controller {
-    public int d = 0;
+    public static int d = 0;
     public String direction = "";
     public static Stage stage = new Stage();
     int[][] walls = new int[14][2];
     public Cell moonRider1 = Cell.R1;
+    private int end;
     @FXML
     private ResourceBundle resources;
 
@@ -42,82 +48,72 @@ public class Controller {
     @FXML
     private GridPane gridPane;
 
+    @FXML
+    private TextField textFieldPoints;
+
 
     @FXML
     void initialize() {
-        ShootButton.setOnAction(actionEvent -> {
-            System.out.print("Shoot");
-            d = 1;
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/sample/filesFXML/direction.fxml"));
+        textFieldPoints.setText(String.valueOf(new Points().getPoints()));
 
-            try {
-                loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
+        ShootButton.setOnAction(actionEvent -> {
+            if (new Shoot().canShootPoints(textFieldPoints.getText())) {
+                new Shoot().shootDirection();
             }
-            Parent root = loader.getRoot();
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
         });
         MoveButton.setOnAction(actionEvent -> {
-            System.out.print("Move");
-            d = 2;
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/sample/filesFXML/direction.fxml"));
-
-            try {
-                loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Parent root = loader.getRoot();
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
+            new Move().moveDirection();
         });
         goButton.setOnAction(actionEvent -> {
             if (d == 1) {
-                this.direction = direction;
                 if (ControllerDirection.direction.equals("up")) {
                     for (int i = 0; i < moonRider1.x; i++) {
                         if (new Walls().canShoot((moonRider1.x - 1) - i, moonRider1.y)) {
-                            gridPane.add(new ImageView(new Image("File:pic/shot.png")), moonRider1.y, (moonRider1.x - 1) - i);
+                            gridPane.add(new ImageView(new Image("File:pic/Shot.png")), moonRider1.y, (moonRider1.x - 1) - i);
+                            end = (moonRider1.x - 1) - i;
                             break;
                         } else {
-                            gridPane.add(new ImageView(new Image("File:pic/shot.png")), moonRider1.y, (moonRider1.x - 1) - i);
+                            gridPane.add(new ImageView(new Image("File:pic/Shot.png")), moonRider1.y, (moonRider1.x - 1) - i);
+                            end = (moonRider1.x - 1) - i;
                         }
                     }
+
+                    /*for (int i = 0; i <= end; i++) {
+                        gridPane.add(new ImageView(new Image("File:pic/Moon.png")), moonRider1.y, (moonRider1.x - 1) - i);
+                    }*/
                 }
                 if (ControllerDirection.direction.equals("down")) {
                     for (int i = 0; i < 7 - moonRider1.x; i++) {
                         if (new Walls().canShoot((moonRider1.x + 1) + i, moonRider1.y)) {
-                            gridPane.add(new ImageView(new Image("File:pic/shot.png")), moonRider1.y, (moonRider1.x + 1) + i);
+                            gridPane.add(new ImageView(new Image("File:pic/Shot.png")), moonRider1.y, (moonRider1.x + 1) + i);
                             break;
                         } else {
-                            gridPane.add(new ImageView(new Image("File:pic/shot.png")), moonRider1.y, (moonRider1.x + 1) + i);
+                            gridPane.add(new ImageView(new Image("File:pic/Shot.png")), moonRider1.y, (moonRider1.x + 1) + i);
                         }
                     }
                 }
                 if (ControllerDirection.direction.equals("left")) {
                     for (int i = 0; i < moonRider1.y; i++) {
                         if (new Walls().canShoot(moonRider1.x, (moonRider1.y - 1) - i)) {
-                            gridPane.add(new ImageView(new Image("File:pic/shot.png")), (moonRider1.y - 1) - i, moonRider1.x);
+                            gridPane.add(new ImageView(new Image("File:pic/Shot.png")), (moonRider1.y - 1) - i, moonRider1.x);
                             break;
                         } else {
-                            gridPane.add(new ImageView(new Image("File:pic/shot.png")), (moonRider1.y - 1) - i, moonRider1.x);
+                            gridPane.add(new ImageView(new Image("File:pic/Shot.png")), (moonRider1.y - 1) - i, moonRider1.x);
                         }
                     }
                 }
                 if (ControllerDirection.direction.equals("right")) {
                     for (int i = 0; i < 7 - moonRider1.y; i++) {
                         if (new Walls().canShoot(moonRider1.x, (moonRider1.y + 1) + i)) {
-                            gridPane.add(new ImageView(new Image("File:pic/shot.png")), (moonRider1.y + 1) + i, moonRider1.x);
+                            gridPane.add(new ImageView(new Image("File:pic/Shot.png")), (moonRider1.y + 1) + i, moonRider1.x);
                             break;
                         } else {
-                            gridPane.add(new ImageView(new Image("File:pic/shot.png")), (moonRider1.y + 1) + i, moonRider1.x);
+                            gridPane.add(new ImageView(new Image("File:pic/Shot.png")), (moonRider1.y + 1) + i, moonRider1.x);
                         }
                     }
                 }
+                textFieldPoints.setText(String.valueOf(new Points().getPoints()));
+                d = 0;
             } else if (d == 2) {
                 this.direction = direction;
                 if (ControllerDirection.direction.equals("up")) {
@@ -160,6 +156,8 @@ public class Controller {
                         gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), moonRider1.y, moonRider1.x);
                     }
                 }
+                textFieldPoints.setText(String.valueOf(new Points().getPoints()));
+                d = 0;
             }
         });
         for (int i = 0; i != 8; i++) {

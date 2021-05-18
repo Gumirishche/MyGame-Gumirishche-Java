@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import sample.Client;
+import sample.Server;
 
 public class HostMenuController {
 
@@ -33,7 +34,7 @@ public class HostMenuController {
                 System.out.println(ex.getMessage());
             }
 
-            new Client();
+            new Server();
         });
     }
 }

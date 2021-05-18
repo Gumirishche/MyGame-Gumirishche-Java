@@ -1,4 +1,4 @@
-package sample;
+package sample.moonRiders;
 /*
 public class MoonRider1 implements MoonRiders{
     private final Cell position;
