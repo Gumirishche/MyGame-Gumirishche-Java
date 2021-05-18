@@ -6,23 +6,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-public class Main extends Application {
+public class Main extends Application{
     public static Stage stage = new Stage();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("filesFXML/hostMenu.fxml"));
         stage.setTitle("Moon Drivers");
         stage.setScene(new Scene(root));
         stage.show();
     }
 
     // private static ServerSocket server;
-    public static void main(String[] args) throws IOException, InterruptedException {
+   /* public static void main(String[] args) throws IOException, InterruptedException {
         launch(args);
         // запустим пул нитей в которых колличество возможных нитей ограничено -
         // 10-ю.
@@ -41,4 +37,9 @@ public class Main extends Application {
         // закрываем фабрику
         exec.shutdown();
     }
+
+    @Override
+    public void run() {
+
+    }*/
 }

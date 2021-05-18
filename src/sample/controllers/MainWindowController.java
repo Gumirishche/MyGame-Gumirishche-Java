@@ -1,4 +1,4 @@
-package sample;
+package sample.controllers;
 
 
 import java.io.IOException;
@@ -9,9 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import sample.Main;
 
 public class MainWindowController {
     Stage stage=new Stage();
@@ -29,7 +28,7 @@ public class MainWindowController {
     void initialize() {
         playButton.setOnAction(actionEvent -> {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/sample/sample.fxml"));
+            loader.setLocation(getClass().getResource("/sample/filesFXML/sample.fxml"));
 
             try {
                 loader.load();

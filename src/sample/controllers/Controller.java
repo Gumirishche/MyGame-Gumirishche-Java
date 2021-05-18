@@ -1,24 +1,22 @@
-package sample;
+package sample.controllers;
 
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import sample.Cell;
+import sample.Walls;
 
 public class Controller {
     public int d = 0;
@@ -51,7 +49,7 @@ public class Controller {
             System.out.print("Shoot");
             d = 1;
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/sample/direction.fxml"));
+            loader.setLocation(getClass().getResource("/sample/filesFXML/direction.fxml"));
 
             try {
                 loader.load();
@@ -66,7 +64,7 @@ public class Controller {
             System.out.print("Move");
             d = 2;
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/sample/direction.fxml"));
+            loader.setLocation(getClass().getResource("/sample/filesFXML/direction.fxml"));
 
             try {
                 loader.load();

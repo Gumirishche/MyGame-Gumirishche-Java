@@ -1,11 +1,10 @@
-package sample;
+package sample.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
 
 public class ControllerDirection {
     public static String direction="";

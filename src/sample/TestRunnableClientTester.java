@@ -1,5 +1,5 @@
 package sample;
-
+/*
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -58,12 +58,10 @@ public class TestRunnableClientTester implements Runnable {
                 Thread.sleep(5000);
 
             }
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 }
+ */
