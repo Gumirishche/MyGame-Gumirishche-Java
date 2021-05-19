@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import sample.Main;
 
 public class MainWindowController {
-    Stage stage=new Stage();
+    public static Stage stage=new Stage();
 
     @FXML
     private ResourceBundle resources;
@@ -28,7 +28,7 @@ public class MainWindowController {
     void initialize() {
         playButton.setOnAction(actionEvent -> {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/sample/filesFXML/sample.fxml"));
+            loader.setLocation(getClass().getResource("/sample/filesFXML/hostOrClient.fxml"));
 
             try {
                 loader.load();

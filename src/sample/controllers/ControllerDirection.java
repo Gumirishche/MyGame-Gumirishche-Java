@@ -40,52 +40,84 @@ public class ControllerDirection {
     @FXML
     void initialize() {
         DirectionBackButton.setOnAction(actionEvent -> {
-            if (Controller.d == 1) {
-                Shoot.stage.close();
+            if (HostOrClientController.client == 1) {
+                if (Controller.d == 1) {
+                    Shoot.stage.close();
+                } else {
+                    Move.stage.close();
+                }
             } else {
-                Move.stage.close();
+                if (ClientController.d == 1) {
+                    Shoot.stage.close();
+                } else {
+                    Move.stage.close();
+                }
             }
         });
         DirectionUpButton.setOnAction(actionEvent -> {
             direction = "up";
-            if (Controller.d == 1) {
-                Shoot.stage.close();
+            if (HostOrClientController.client == 1) {
+                if (Controller.d == 1) {
+                    Shoot.stage.close();
+                } else {
+                    Move.stage.close();
+                }
             } else {
-                Move.stage.close();
+                if (ClientController.d == 1) {
+                    Shoot.stage.close();
+                } else {
+                    Move.stage.close();
+                }
             }
         });
         DirectionDownButton.setOnAction(actionEvent -> {
             direction = "down";
-            if (Controller.d == 1) {
-                Shoot.stage.close();
+            if (HostOrClientController.client == 1) {
+                if (Controller.d == 1) {
+                    Shoot.stage.close();
+                } else {
+                    Move.stage.close();
+                }
             } else {
-                Move.stage.close();
+                if (ClientController.d == 1) {
+                    Shoot.stage.close();
+                } else {
+                    Move.stage.close();
+                }
             }
         });
         DirectionLeftButton.setOnAction(actionEvent -> {
             direction = "left";
-            if (Controller.d == 1) {
-                Shoot.stage.close();
+            if (HostOrClientController.client == 1) {
+                if (Controller.d == 1) {
+                    Shoot.stage.close();
+                } else {
+                    Move.stage.close();
+                }
             } else {
-                Move.stage.close();
+                if (ClientController.d == 1) {
+                    Shoot.stage.close();
+                } else {
+                    Move.stage.close();
+                }
             }
         });
         DirectionRightButton.setOnAction(actionEvent -> {
             direction = "right";
-            if (Controller.d == 1) {
-                Shoot.stage.close();
+            if (HostOrClientController.client == 1) {
+                if (Controller.d == 1) {
+                    Shoot.stage.close();
+                } else {
+                    Move.stage.close();
+                }
             } else {
-                Move.stage.close();
+                if (ClientController.d == 1) {
+                    Shoot.stage.close();
+                } else {
+                    Move.stage.close();
+                }
             }
         });
-    }
-
-    public static Group getGroup() {
-        return group;
-    }
-
-    public static void setGroup(Group group) {
-        ControllerDirection.group = group;
     }
 }
 

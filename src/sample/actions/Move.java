@@ -4,7 +4,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.controllers.ClientController;
 import sample.controllers.Controller;
+import sample.controllers.HostOrClientController;
 
 import java.io.IOException;
 
@@ -13,7 +15,11 @@ public class Move {
 
     public void moveDirection() {
         System.out.print("Move");
-        Controller.d = 2;
+        if (HostOrClientController.client == 1) {
+            Controller.d = 2;
+        } else {
+            ClientController.d = 2;
+        }
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/sample/filesFXML/direction.fxml"));
 

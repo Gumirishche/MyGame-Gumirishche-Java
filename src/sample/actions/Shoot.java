@@ -5,7 +5,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import sample.controllers.ClientController;
 import sample.controllers.Controller;
+import sample.controllers.HostOrClientController;
 
 import java.io.IOException;
 
@@ -15,7 +17,11 @@ public class Shoot {
 
     public void shootDirection() {
         System.out.print("Shoot");
-        Controller.d = 1;
+        if (HostOrClientController.client == 1) {
+            Controller.d = 1;
+        } else {
+            ClientController.d = 1;
+        }
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/sample/filesFXML/direction.fxml"));
 
