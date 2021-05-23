@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
@@ -29,6 +32,8 @@ public class ClientController {
     int[][] walls = new int[14][2];
     public Cell moonRider2 = Cell.A8;
     private int end;
+    String[][] wallsInfo=new String[14][2];
+    String lineWalls[]=new String[14];
     @FXML
     private ResourceBundle resources;
 
@@ -164,7 +169,17 @@ public class ClientController {
                 gridPane.add(new ImageView(new Image("File:pic/Moon.png")), i, j);
             }
         }
-        walls = new Walls().wallsPosition();
+        try (FileReader fr = new FileReader("saves\\wallsInfo.txt")) {
+            // читаем посимвольно
+            BufferedReader reader = new BufferedReader(fr);
+            lineWalls = reader.readLine().split(" ");
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        for(int i=0;i<14;i++){
+        walls[i][0] =Integer.parseInt(lineWalls[i].split(",")[0]);
+        walls[i][1]=Integer.parseInt(lineWalls[i].split(",")[1]);
+        }
         for (int i = 0; i < 14; i++) {
             gridPane.add(new ImageView(new Image("File:pic/Walls.png")), walls[i][0], walls[i][1]);
         }

@@ -8,6 +8,10 @@ import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
@@ -27,9 +31,11 @@ public class Controller {
     public static int d = 0;
     public String direction = "";
     public static Stage stage = new Stage();
-    int[][] walls = new int[14][2];
+    public static int[][] walls = new int[14][2];
     public Cell moonRider1 = Cell.R1;
-    private int end;
+    private int end,port=0;
+    String inform;
+    String[][] wallsInfo=new String[14][2];
     @FXML
     private ResourceBundle resources;
 
@@ -55,10 +61,21 @@ public class Controller {
     @FXML
     void initialize() {
         textFieldPoints.setText(String.valueOf(new Points().getPoints()));
+        try (FileReader fr = new FileReader("saves\\playerOneHostPort.txt")) {
+            // читаем посимвольно
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            port = Integer.parseInt(line);;
+        } catch (IOException ex) {
+
+            System.out.println(ex.getMessage());
+        }
+
 
         ShootButton.setOnAction(actionEvent -> {
             if (new Shoot().canShootPoints(textFieldPoints.getText())) {
                 new Shoot().shootDirection();
+
             }
         });
         MoveButton.setOnAction(actionEvent -> {
@@ -168,7 +185,21 @@ public class Controller {
         walls = new Walls().wallsPosition();
         for (int i = 0; i < 14; i++) {
             gridPane.add(new ImageView(new Image("File:pic/Walls.png")), walls[i][0], walls[i][1]);
+            wallsInfo[i][0]=String.valueOf(walls[i][0]);
+            wallsInfo[i][1]=String.valueOf(walls[i][1]);
         }
+        try(FileWriter writer = new FileWriter("saves\\wallsInfo.txt", false))
+        {
+            // запись всей строки
+            for(int i=0;i<14;i++){
+            writer.write(wallsInfo[i][0]+","+wallsInfo[i][1]+" ");
+            writer.flush();
+            }
+        }
+        catch(IOException ex){
+            System.out.println(ex.getMessage());
+        }
+
         gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), 7, 0);
         gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), 0, 7);
     }

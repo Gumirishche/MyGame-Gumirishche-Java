@@ -13,7 +13,7 @@ import sample.Main;
 
 public class HostOrClientController {
     public static int client;
-    Stage stage=new Stage();
+    public static Stage stage=new Stage();
 
     @FXML
     private ResourceBundle resources;
@@ -32,7 +32,7 @@ public class HostOrClientController {
        hostButton.setOnAction(actionEvent -> {
            client=1;
            FXMLLoader loader = new FXMLLoader();
-           loader.setLocation(getClass().getResource("/sample/filesFXML/sample.fxml"));
+           loader.setLocation(getClass().getResource("/sample/filesFXML/hostMenu.fxml"));
 
            try {
                loader.load();
@@ -47,7 +47,7 @@ public class HostOrClientController {
        clientButton.setOnAction(actionEvent -> {
            client=2;
            FXMLLoader loader = new FXMLLoader();
-           loader.setLocation(getClass().getResource("/sample/filesFXML/client.fxml"));
+           loader.setLocation(getClass().getResource("/sample/filesFXML/clientMenu.fxml"));
 
            try {
                loader.load();

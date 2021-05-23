@@ -6,12 +6,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import sample.Client;
 import sample.Server;
 
 public class HostMenuController {
-
+Stage stage =new Stage();
     @FXML
     private ResourceBundle resources;
 
@@ -20,6 +25,9 @@ public class HostMenuController {
 
     @FXML
     private TextField portHost;
+
+    @FXML
+    private Button nextButton;
 
     @FXML
     void initialize() {
@@ -34,7 +42,18 @@ public class HostMenuController {
                 System.out.println(ex.getMessage());
             }
 
-            new Server();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/sample/filesFXML/sample.fxml"));
+
+            try {
+                loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Parent root = loader.getRoot();
+            HostOrClientController.stage.close();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
         });
     }
 }
