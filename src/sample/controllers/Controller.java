@@ -85,7 +85,7 @@ public class Controller {
             if (d == 1) {
                 if (ControllerDirection.direction.equals("up")) {
                     for (int i = 0; i < moonRider1.x; i++) {
-                        if (new Walls().canShoot((moonRider1.x - 1) - i, moonRider1.y)) {
+                        if (new Walls().canShoot((moonRider1.x - 1) - i, moonRider1.y)|| new Shoot().win((moonRider1.x - 1) - i, moonRider1.y)) {
                             gridPane.add(new ImageView(new Image("File:pic/Shot.png")), moonRider1.y, (moonRider1.x - 1) - i);
                             end = (moonRider1.x - 1) - i;
                             break;
@@ -101,7 +101,7 @@ public class Controller {
                 }
                 if (ControllerDirection.direction.equals("down")) {
                     for (int i = 0; i < 7 - moonRider1.x; i++) {
-                        if (new Walls().canShoot((moonRider1.x + 1) + i, moonRider1.y)) {
+                        if (new Walls().canShoot((moonRider1.x + 1) + i, moonRider1.y)|| new Shoot().win((moonRider1.x + 1) + i, moonRider1.y)) {
                             gridPane.add(new ImageView(new Image("File:pic/Shot.png")), moonRider1.y, (moonRider1.x + 1) + i);
                             break;
                         } else {
@@ -111,7 +111,7 @@ public class Controller {
                 }
                 if (ControllerDirection.direction.equals("left")) {
                     for (int i = 0; i < moonRider1.y; i++) {
-                        if (new Walls().canShoot(moonRider1.x, (moonRider1.y - 1) - i)) {
+                        if (new Walls().canShoot(moonRider1.x, (moonRider1.y - 1) - i)|| new Shoot().win(moonRider1.x, (moonRider1.y - 1) - i)) {
                             gridPane.add(new ImageView(new Image("File:pic/Shot.png")), (moonRider1.y - 1) - i, moonRider1.x);
                             break;
                         } else {
@@ -121,7 +121,7 @@ public class Controller {
                 }
                 if (ControllerDirection.direction.equals("right")) {
                     for (int i = 0; i < 7 - moonRider1.y; i++) {
-                        if (new Walls().canShoot(moonRider1.x, (moonRider1.y + 1) + i)) {
+                        if (new Walls().canShoot(moonRider1.x, (moonRider1.y + 1) + i)|| new Shoot().win(moonRider1.x, (moonRider1.y + 1) + i)) {
                             gridPane.add(new ImageView(new Image("File:pic/Shot.png")), (moonRider1.y + 1) + i, moonRider1.x);
                             break;
                         } else {
@@ -200,7 +200,7 @@ public class Controller {
             System.out.println(ex.getMessage());
         }
 
-        gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), 7, 0);
+        gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), 6, 0);
         gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), 0, 7);
     }
 }

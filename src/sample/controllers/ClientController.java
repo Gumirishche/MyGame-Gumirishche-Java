@@ -30,7 +30,7 @@ public class ClientController {
     public String direction = "";
     public static Stage stage = new Stage();
     int[][] walls = new int[14][2];
-    public Cell moonRider2 = Cell.A8;
+    public static Cell moonRider2 = Cell.A7;
     private int end;
     String[][] wallsInfo=new String[14][2];
     String lineWalls[]=new String[14];

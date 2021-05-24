@@ -14,6 +14,7 @@ import java.io.IOException;
 public class Shoot {
     public static Stage stage = new Stage();
     GridPane gridPane;
+    boolean win;
 
     public void shootDirection() {
         System.out.print("Shoot");
@@ -37,5 +38,18 @@ public class Shoot {
 
     public boolean canShootPoints(String points) {
         return Integer.parseInt(points) == 3;
+    }
+
+    public boolean win(int y, int x) {
+        for (int i = 0; i < 14; i++) {
+            if (y == ClientController.moonRider2.x && x==ClientController.moonRider2.y) {
+                System.out.println("WIN 1 PLAYER");
+                win = true;
+                break;
+            } else {
+                win = false;
+            }
+        }
+        return win;
     }
 }
