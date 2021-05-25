@@ -22,6 +22,7 @@ import sample.events.Points;
 import sample.events.Walls;
 import sample.actions.Move;
 import sample.actions.Shoot;
+import sample.server.Server20;
 
 import javax.swing.*;
 
@@ -30,10 +31,10 @@ public class ClientController {
     public String direction = "";
     public static Stage stage = new Stage();
     int[][] walls = new int[14][2];
-    public static Cell moonRider2 = Cell.A7;
-    private int end;
-    String[][] wallsInfo=new String[14][2];
-    String lineWalls[]=new String[14];
+    public static Cell moonRider2 = Cell.A8;
+    private int end, port;
+    String[][] wallsInfo = new String[14][2];
+    String lineWalls[] = new String[14];
     @FXML
     private ResourceBundle resources;
 
@@ -59,6 +60,17 @@ public class ClientController {
     @FXML
     void initialize() {
         textFieldPoints.setText(String.valueOf(new Points().getPoints()));
+
+        try (FileReader fr = new FileReader("saves\\playerTwoHostPort.txt")) {
+            // читаем посимвольно
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            port = Integer.parseInt(line);
+            ;
+        } catch (IOException ex) {
+
+            System.out.println(ex.getMessage());
+        }
 
         ShootButton.setOnAction(actionEvent -> {
             if (new Shoot().canShootPoints(textFieldPoints.getText())) {
@@ -176,12 +188,15 @@ public class ClientController {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        for(int i=0;i<14;i++){
-        walls[i][0] =Integer.parseInt(lineWalls[i].split(",")[0]);
-        walls[i][1]=Integer.parseInt(lineWalls[i].split(",")[1]);
+        for (int i = 0; i < 14; i++) {
+            walls[i][0] = Integer.parseInt(lineWalls[i].split(",")[0]);
+            walls[i][1] = Integer.parseInt(lineWalls[i].split(",")[1]);
         }
         for (int i = 0; i < 14; i++) {
-            gridPane.add(new ImageView(new Image("File:pic/Walls.png")), walls[i][0], walls[i][1]);
+            if (walls[i][0] == 8 || walls[i][1] == 8) {
+            } else {
+                gridPane.add(new ImageView(new Image("File:pic/Walls.png")), walls[i][0], walls[i][1]);
+            }
         }
         gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), 7, 0);
         gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), 0, 7);

@@ -24,6 +24,7 @@ import sample.events.Points;
 import sample.events.Walls;
 import sample.actions.Move;
 import sample.actions.Shoot;
+import sample.server.Server20;
 
 import javax.swing.*;
 
@@ -35,7 +36,7 @@ public class Controller {
     public Cell moonRider1 = Cell.R1;
     private int end,port=0;
     String inform;
-    String[][] wallsInfo=new String[14][2];
+    public static String[][] wallsInfo=new String[14][2];
     @FXML
     private ResourceBundle resources;
 
@@ -176,6 +177,7 @@ public class Controller {
                 textFieldPoints.setText(String.valueOf(new Points().getPoints()));
                 d = 0;
             }
+            new Server20(port, "saves");
         });
         for (int i = 0; i != 8; i++) {
             for (int j = 0; j != 8; j++) {
@@ -185,8 +187,8 @@ public class Controller {
         walls = new Walls().wallsPosition();
         for (int i = 0; i < 14; i++) {
             gridPane.add(new ImageView(new Image("File:pic/Walls.png")), walls[i][0], walls[i][1]);
-            wallsInfo[i][0]=String.valueOf(walls[i][0]);
-            wallsInfo[i][1]=String.valueOf(walls[i][1]);
+            wallsInfo[i][0] = String.valueOf(walls[i][0]);
+            wallsInfo[i][1] = String.valueOf(walls[i][1]);
         }
         try(FileWriter writer = new FileWriter("saves\\wallsInfo.txt", false))
         {

@@ -2,6 +2,9 @@ package sample.events;
 
 import sample.controllers.Controller;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Walls {
     public static int[][] walls = new int[14][2];
     public static boolean canGo = true;
@@ -35,10 +38,23 @@ public class Walls {
                 walls[i][0] = 8;
                 walls[i][1] = 8;
                 canGo = true;
+                Controller.wallsInfo[i][0]=String.valueOf(walls[i][0]);
+                Controller.wallsInfo[i][1]=String.valueOf(walls[i][1]);
                 break;
             } else {
                 canGo = false;
             }
+        }
+        try(FileWriter writer = new FileWriter("saves\\wallsInfo.txt", false))
+        {
+            // запись всей строки
+            for(int i=0;i<14;i++){
+                writer.write(Controller.wallsInfo[i][0]+","+Controller.wallsInfo[i][1]+" ");
+                writer.flush();
+            }
+        }
+        catch(IOException ex){
+            System.out.println(ex.getMessage());
         }
         return canGo;
     }
