@@ -13,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.Client;
-import sample.Server;
 
 public class HostMenuController {
 Stage stage =new Stage();

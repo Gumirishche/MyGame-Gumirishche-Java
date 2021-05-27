@@ -177,7 +177,6 @@ public class Controller {
                 textFieldPoints.setText(String.valueOf(new Points().getPoints()));
                 d = 0;
             }
-            new Server20(port, "saves");
         });
         for (int i = 0; i != 8; i++) {
             for (int j = 0; j != 8; j++) {
