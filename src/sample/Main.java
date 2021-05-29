@@ -16,30 +16,4 @@ public class Main extends Application {
         stage.setScene(new Scene(root));
         stage.show();
     }
-
-    // private static ServerSocket server;
-   /* public static void main(String[] args) throws IOException, InterruptedException {
-        launch(args);
-        // запустим пул нитей в которых колличество возможных нитей ограничено -
-        // 10-ю.
-        ExecutorService exec = Executors.newFixedThreadPool(10);
-        int j = 0;
-
-        // стартуем цикл в котором с паузой в 10 милисекунд стартуем Runnable
-        // клиентов,
-        // которые пишут какое-то количество сообщений
-        while (j < 10) {
-            j++;
-            exec.execute(new TestRunnableClientTester());
-            Thread.sleep(10);
-        }
-
-        // закрываем фабрику
-        exec.shutdown();
-    }
-
-    @Override
-    public void run() {
-
-    }*/
 }

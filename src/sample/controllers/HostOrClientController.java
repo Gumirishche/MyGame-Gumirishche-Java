@@ -3,6 +3,8 @@ package sample.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

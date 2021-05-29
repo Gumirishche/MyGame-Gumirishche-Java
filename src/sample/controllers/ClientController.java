@@ -7,10 +7,8 @@ import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
@@ -205,6 +203,25 @@ public class ClientController {
             for (int j = 0; j != 8; j++) {
                 gridPane.add(new ImageView(new Image("File:pic/Moon.png")), i, j);
             }
+        }
+
+        try {
+            URL url = new URL("http://127.0.0.1:1234/wallsInfo.txt");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+
+            File f1 = new File("saves\\1.txt");
+            FileOutputStream fw = new FileOutputStream(f1);
+
+            byte[] b = new byte[1024];
+            int count = 0;
+
+            while ((count=bis.read(b)) != -1)
+                fw.write(b,0,count);
+
+            fw.close();
+        } catch (IOException ex) {
         }
     }
 }

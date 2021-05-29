@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
@@ -170,6 +171,24 @@ public class Controller {
                 textFieldPoints.setText(String.valueOf(new Points().getPoints()));
                 d = 0;
                 new MoonRider1().setMoonRider1(moonRider1.y,moonRider1.x);
+            }
+            try {
+                URL url = new URL("http://127.0.0.1:1234/wallsInfo.txt");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+
+                File f1 = new File("saves\\1.txt");
+                FileOutputStream fw = new FileOutputStream(f1);
+
+                byte[] b = new byte[1024];
+                int count = 0;
+
+                while ((count=bis.read(b)) != -1)
+                    fw.write(b,0,count);
+
+                fw.close();
+            } catch (IOException ex) {
             }
         });
 
