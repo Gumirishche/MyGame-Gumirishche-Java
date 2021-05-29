@@ -21,7 +21,7 @@ public class Walls {
             wallsInfo[i][0]=String.valueOf(walls[i][0]);
             wallsInfo[i][1]=String.valueOf(walls[i][1]);
         }
-        try(FileWriter writer = new FileWriter("saves\\wallsInfo.txt", false))
+        try(FileWriter writer = new FileWriter("saves\\wallsInfo1.txt", false))
         {
             // запись всей строки
             for(int i=0;i<14;i++){
@@ -35,7 +35,7 @@ public class Walls {
     }
 
     public boolean canGo(int y, int x) {
-        try (FileReader fr = new FileReader("saves\\wallsInfo.txt")) {
+        try (FileReader fr = new FileReader("saves\\wallsInfo1.txt")) {
             // читаем посимвольно
             BufferedReader reader = new BufferedReader(fr);
             lineWalls = reader.readLine().split(" ");
@@ -59,7 +59,7 @@ public class Walls {
     }
 
     public boolean canShoot(int y, int x) {
-        try (FileReader fr = new FileReader("saves\\wallsInfo.txt")) {
+        try (FileReader fr = new FileReader("saves\\wallsInfo1.txt")) {
             // читаем посимвольно
             BufferedReader reader = new BufferedReader(fr);
             lineWalls = reader.readLine().split(" ");
@@ -90,7 +90,7 @@ public class Walls {
     }
 
     public void writeWalls(String[][] wallsInfo){
-        try(FileWriter writer = new FileWriter("saves\\wallsInfo.txt", false))
+        try(FileWriter writer = new FileWriter("saves\\wallsInfo1.txt", false))
         {
             // запись всей строки
             for(int i=0;i<14;i++){

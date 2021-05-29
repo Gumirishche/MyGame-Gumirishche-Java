@@ -34,9 +34,9 @@ public class Controller {
     public static Stage stage = new Stage();
     public static int[][] walls = new int[14][2];
     public Cell moonRider1 = Cell.R1;
-    private int end,port=0;
+    private int end, port = 0;
     String inform;
-    public static String[][] wallsInfo=new String[14][2];
+    public static String[][] wallsInfo = new String[14][2];
     String[] lineWalls = new String[14];
     @FXML
     private ResourceBundle resources;
@@ -80,23 +80,17 @@ public class Controller {
             if (d == 1) {
                 if (ControllerDirection.direction.equals("up")) {
                     for (int i = 0; i < moonRider1.x; i++) {
-                        if (new Walls().canShoot((moonRider1.x - 1) - i, moonRider1.y)|| new Shoot().win((moonRider1.x - 1) - i, moonRider1.y)) {
+                        if (new Walls().canShoot((moonRider1.x - 1) - i, moonRider1.y) || new Shoot().win((moonRider1.x - 1) - i, moonRider1.y)) {
                             gridPane.add(new ImageView(new Image("File:pic/Shot.png")), moonRider1.y, (moonRider1.x - 1) - i);
-                            end = (moonRider1.x - 1) - i;
                             break;
                         } else {
                             gridPane.add(new ImageView(new Image("File:pic/Shot.png")), moonRider1.y, (moonRider1.x - 1) - i);
-                            end = (moonRider1.x - 1) - i;
                         }
                     }
-
-                    /*for (int i = 0; i <= end; i++) {
-                        gridPane.add(new ImageView(new Image("File:pic/Moon.png")), moonRider1.y, (moonRider1.x - 1) - i);
-                    }*/
                 }
                 if (ControllerDirection.direction.equals("down")) {
                     for (int i = 0; i < 7 - moonRider1.x; i++) {
-                        if (new Walls().canShoot((moonRider1.x + 1) + i, moonRider1.y)|| new Shoot().win((moonRider1.x + 1) + i, moonRider1.y)) {
+                        if (new Walls().canShoot((moonRider1.x + 1) + i, moonRider1.y) || new Shoot().win((moonRider1.x + 1) + i, moonRider1.y)) {
                             gridPane.add(new ImageView(new Image("File:pic/Shot.png")), moonRider1.y, (moonRider1.x + 1) + i);
                             break;
                         } else {
@@ -106,7 +100,7 @@ public class Controller {
                 }
                 if (ControllerDirection.direction.equals("left")) {
                     for (int i = 0; i < moonRider1.y; i++) {
-                        if (new Walls().canShoot(moonRider1.x, (moonRider1.y - 1) - i)|| new Shoot().win(moonRider1.x, (moonRider1.y - 1) - i)) {
+                        if (new Walls().canShoot(moonRider1.x, (moonRider1.y - 1) - i) || new Shoot().win(moonRider1.x, (moonRider1.y - 1) - i)) {
                             gridPane.add(new ImageView(new Image("File:pic/Shot.png")), (moonRider1.y - 1) - i, moonRider1.x);
                             break;
                         } else {
@@ -116,7 +110,7 @@ public class Controller {
                 }
                 if (ControllerDirection.direction.equals("right")) {
                     for (int i = 0; i < 7 - moonRider1.y; i++) {
-                        if (new Walls().canShoot(moonRider1.x, (moonRider1.y + 1) + i)|| new Shoot().win(moonRider1.x, (moonRider1.y + 1) + i)) {
+                        if (new Walls().canShoot(moonRider1.x, (moonRider1.y + 1) + i) || new Shoot().win(moonRider1.x, (moonRider1.y + 1) + i)) {
                             gridPane.add(new ImageView(new Image("File:pic/Shot.png")), (moonRider1.y + 1) + i, moonRider1.x);
                             break;
                         } else {
@@ -170,35 +164,35 @@ public class Controller {
                 }
                 textFieldPoints.setText(String.valueOf(new Points().getPoints()));
                 d = 0;
-                new MoonRider1().setMoonRider1(moonRider1.y,moonRider1.x);
+                new MoonRider1().setMoonRider1(moonRider1.y, moonRider1.x);
             }
+        });
+
+        updateButton.setOnAction(actionEvent -> {
             try {
-                URL url = new URL("http://127.0.0.1:1234/wallsInfo.txt");
+                URL url = new URL("http://127.0.0.1:1234/wallsInfo2.txt");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                 BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
 
-                File f1 = new File("saves\\1.txt");
+                File f1 = new File("saves\\wallsInfo1.txt");
                 FileOutputStream fw = new FileOutputStream(f1);
 
                 byte[] b = new byte[1024];
                 int count = 0;
 
-                while ((count=bis.read(b)) != -1)
-                    fw.write(b,0,count);
+                while ((count = bis.read(b)) != -1)
+                    fw.write(b, 0, count);
 
                 fw.close();
             } catch (IOException ex) {
             }
-        });
-
-        updateButton.setOnAction(actionEvent -> {
             for (int i = 0; i != 8; i++) {
                 for (int j = 0; j != 8; j++) {
                     gridPane.add(new ImageView(new Image("File:pic/Moon.png")), i, j);
                 }
             }
-            try (FileReader fr = new FileReader("saves\\wallsInfo.txt")) {
+            try (FileReader fr = new FileReader("saves\\wallsInfo1.txt")) {
                 // читаем посимвольно
                 BufferedReader reader = new BufferedReader(fr);
                 lineWalls = reader.readLine().split(" ");

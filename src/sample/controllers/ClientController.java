@@ -86,10 +86,6 @@ public class ClientController {
                             end = (moonRider2.x - 1) - i;
                         }
                     }
-
-                    /*for (int i = 0; i <= end; i++) {
-                        gridPane.add(new ImageView(new Image("File:pic/Moon.png")), moonRider1.y, (moonRider1.x - 1) - i);
-                    }*/
                 }
                 if (ControllerDirection.direction.equals("down")) {
                     for (int i = 0; i < 7 - moonRider2.x; i++) {
@@ -172,12 +168,32 @@ public class ClientController {
         });
 
         updateButton.setOnAction(actionEvent -> {
+            try {
+                URL url = new URL("http://127.0.0.1:1234/wallsInfo1.txt");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+
+                File f1 = new File("saved\\wallsInfo2.txt");
+                FileOutputStream fw = new FileOutputStream(f1);
+
+                byte[] b = new byte[1024];
+                int count = 0;
+
+                while ((count=bis.read(b)) != -1)
+                    fw.write(b,0,count);
+
+                fw.close();
+                System.out.println("Client принял!");
+            } catch (IOException ex) {
+            }
+
             for (int i = 0; i != 8; i++) {
                 for (int j = 0; j != 8; j++) {
                     gridPane.add(new ImageView(new Image("File:pic/Moon.png")), i, j);
                 }
             }
-            try (FileReader fr = new FileReader("saves\\wallsInfo.txt")) {
+            try (FileReader fr = new FileReader("saved\\wallsInfo2.txt")) {
                 // читаем посимвольно
                 BufferedReader reader = new BufferedReader(fr);
                 lineWalls = reader.readLine().split(" ");
@@ -203,25 +219,6 @@ public class ClientController {
             for (int j = 0; j != 8; j++) {
                 gridPane.add(new ImageView(new Image("File:pic/Moon.png")), i, j);
             }
-        }
-
-        try {
-            URL url = new URL("http://127.0.0.1:1234/wallsInfo.txt");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-            BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
-
-            File f1 = new File("saves\\1.txt");
-            FileOutputStream fw = new FileOutputStream(f1);
-
-            byte[] b = new byte[1024];
-            int count = 0;
-
-            while ((count=bis.read(b)) != -1)
-                fw.write(b,0,count);
-
-            fw.close();
-        } catch (IOException ex) {
         }
     }
 }
