@@ -10,6 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import sample.Main;
+import sample.events.Walls;
+import sample.moonRiders.MoonRider1;
+import sample.moonRiders.MoonRider2;
 
 public class HostOrClientController {
     public static int client;
@@ -30,10 +33,11 @@ public class HostOrClientController {
     @FXML
     void initialize() {
        hostButton.setOnAction(actionEvent -> {
+           new Walls().wallsPosition();
+           new MoonRider1().defaultMoonRider1();
            client=1;
            FXMLLoader loader = new FXMLLoader();
-           loader.setLocation(getClass().getResource("/sample/filesFXML/hostMenu.fxml"));
-
+           loader.setLocation(getClass().getResource("/sample/filesFXML/sample.fxml"));
            try {
                loader.load();
            } catch (IOException e) {
@@ -46,8 +50,9 @@ public class HostOrClientController {
        });
        clientButton.setOnAction(actionEvent -> {
            client=2;
+           new MoonRider2().defaultMoonRider2();
            FXMLLoader loader = new FXMLLoader();
-           loader.setLocation(getClass().getResource("/sample/filesFXML/clientMenu.fxml"));
+           loader.setLocation(getClass().getResource("/sample/filesFXML/client.fxml"));
 
            try {
                loader.load();

@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,6 +23,8 @@ import sample.events.Points;
 import sample.events.Walls;
 import sample.actions.Move;
 import sample.actions.Shoot;
+import sample.moonRiders.MoonRider1;
+import sample.moonRiders.MoonRider2;
 import sample.server.Server20;
 
 import javax.swing.*;
@@ -34,7 +37,7 @@ public class ClientController {
     public static Cell moonRider2 = Cell.A8;
     private int end, port;
     String[][] wallsInfo = new String[14][2];
-    String lineWalls[] = new String[14];
+    String[] lineWalls = new String[14];
     @FXML
     private ResourceBundle resources;
 
@@ -56,21 +59,13 @@ public class ClientController {
     @FXML
     private TextField textFieldPoints;
 
+    @FXML
+    private Button updateButton;
+
 
     @FXML
     void initialize() {
         textFieldPoints.setText(String.valueOf(new Points().getPoints()));
-
-        try (FileReader fr = new FileReader("saves\\playerTwoHostPort.txt")) {
-            // читаем посимвольно
-            BufferedReader reader = new BufferedReader(fr);
-            String line = reader.readLine();
-            port = Integer.parseInt(line);
-            ;
-        } catch (IOException ex) {
-
-            System.out.println(ex.getMessage());
-        }
 
         ShootButton.setOnAction(actionEvent -> {
             if (new Shoot().canShootPoints(textFieldPoints.getText())) {
@@ -174,31 +169,37 @@ public class ClientController {
                 }
                 textFieldPoints.setText(String.valueOf(new Points().getPoints()));
                 d = 0;
+                new MoonRider2().setMoonRider2(moonRider2.y,moonRider2.x);
             }
         });
+
+        updateButton.setOnAction(actionEvent -> {
+            try (FileReader fr = new FileReader("saves\\wallsInfo.txt")) {
+                // читаем посимвольно
+                BufferedReader reader = new BufferedReader(fr);
+                lineWalls = reader.readLine().split(" ");
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+            for (int i = 0; i < 14; i++) {
+                walls[i][0] = Integer.parseInt(lineWalls[i].split(",")[0]);
+                walls[i][1] = Integer.parseInt(lineWalls[i].split(",")[1]);
+            }
+            for (int i = 0; i < 14; i++) {
+                if (walls[i][0] != 8 || walls[i][1] != 8)
+                    gridPane.add(new ImageView(new Image("File:pic/Walls.png")), walls[i][0], walls[i][1]);
+                System.out.println(walls[i][0]+" "+walls[i][1]);
+                wallsInfo[i][0] = String.valueOf(walls[i][0]);
+                wallsInfo[i][1] = String.valueOf(walls[i][1]);
+            }
+            gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), new MoonRider2().getMoonRider2()[0], new MoonRider2().getMoonRider2()[1]);
+            gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), new MoonRider1().getMoonRider1()[0], new MoonRider1().getMoonRider1()[1]);
+        });
+
         for (int i = 0; i != 8; i++) {
             for (int j = 0; j != 8; j++) {
                 gridPane.add(new ImageView(new Image("File:pic/Moon.png")), i, j);
             }
         }
-        try (FileReader fr = new FileReader("saves\\wallsInfo.txt")) {
-            // читаем посимвольно
-            BufferedReader reader = new BufferedReader(fr);
-            lineWalls = reader.readLine().split(" ");
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-        for (int i = 0; i < 14; i++) {
-            walls[i][0] = Integer.parseInt(lineWalls[i].split(",")[0]);
-            walls[i][1] = Integer.parseInt(lineWalls[i].split(",")[1]);
-        }
-        for (int i = 0; i < 14; i++) {
-            if (walls[i][0] == 8 || walls[i][1] == 8) {
-            } else {
-                gridPane.add(new ImageView(new Image("File:pic/Walls.png")), walls[i][0], walls[i][1]);
-            }
-        }
-        gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), 7, 0);
-        gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), 0, 7);
     }
 }
