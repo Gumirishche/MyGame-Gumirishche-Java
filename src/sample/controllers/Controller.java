@@ -62,6 +62,9 @@ public class Controller {
     @FXML
     private Button updateButton;
 
+    @FXML
+    private Button writeButton;
+
 
     @FXML
     void initialize() {
@@ -77,6 +80,25 @@ public class Controller {
             new Move().moveDirection();
         });
         goButton.setOnAction(actionEvent -> {
+            try {
+                URL url = new URL("http://127.0.0.1:1234/wallsInfo2.txt");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+
+                File f1 = new File("saves\\wallsInfo1.txt");
+                FileOutputStream fw = new FileOutputStream(f1);
+
+                byte[] b = new byte[1024];
+                int count = 0;
+
+                while ((count = bis.read(b)) != -1)
+                    fw.write(b, 0, count);
+
+                fw.close();
+                System.out.println("Host принял!");
+            } catch (IOException ex) {
+            }
             if (d == 1) {
                 if (ControllerDirection.direction.equals("up")) {
                     for (int i = 0; i < moonRider1.x; i++) {
@@ -168,25 +190,10 @@ public class Controller {
             }
         });
 
+        writeButton.setOnAction(actionEvent -> {
+        });
+
         updateButton.setOnAction(actionEvent -> {
-            try {
-                URL url = new URL("http://127.0.0.1:1234/wallsInfo2.txt");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-                BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
-
-                File f1 = new File("saves\\wallsInfo1.txt");
-                FileOutputStream fw = new FileOutputStream(f1);
-
-                byte[] b = new byte[1024];
-                int count = 0;
-
-                while ((count = bis.read(b)) != -1)
-                    fw.write(b, 0, count);
-
-                fw.close();
-            } catch (IOException ex) {
-            }
             for (int i = 0; i != 8; i++) {
                 for (int j = 0; j != 8; j++) {
                     gridPane.add(new ImageView(new Image("File:pic/Moon.png")), i, j);
@@ -210,7 +217,7 @@ public class Controller {
                 wallsInfo[i][0] = String.valueOf(walls[i][0]);
                 wallsInfo[i][1] = String.valueOf(walls[i][1]);
             }
-            gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), new MoonRider2().getMoonRider2()[0], new MoonRider2().getMoonRider2()[1]);
+            gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), new MoonRider2().getMoonRider2For1()[0], new MoonRider2().getMoonRider2For1()[1]);
             gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), new MoonRider1().getMoonRider1()[0], new MoonRider1().getMoonRider1()[1]);
         });
         for (int i = 0; i != 8; i++) {

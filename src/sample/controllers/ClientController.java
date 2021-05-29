@@ -60,6 +60,9 @@ public class ClientController {
     @FXML
     private Button updateButton;
 
+    @FXML
+    private Button writeButton;
+
 
     @FXML
     void initialize() {
@@ -167,9 +170,13 @@ public class ClientController {
             }
         });
 
+        writeButton.setOnAction(actionEvent -> {
+
+        });
+
         updateButton.setOnAction(actionEvent -> {
             try {
-                URL url = new URL("http://127.0.0.1:1234/wallsInfo1.txt");
+                URL url = new URL("http://127.0.0.1:4321/wallsInfo1.txt");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                 BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
@@ -187,7 +194,6 @@ public class ClientController {
                 System.out.println("Client принял!");
             } catch (IOException ex) {
             }
-
             for (int i = 0; i != 8; i++) {
                 for (int j = 0; j != 8; j++) {
                     gridPane.add(new ImageView(new Image("File:pic/Moon.png")), i, j);
@@ -212,7 +218,7 @@ public class ClientController {
                 wallsInfo[i][1] = String.valueOf(walls[i][1]);
             }
             gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), new MoonRider2().getMoonRider2()[0], new MoonRider2().getMoonRider2()[1]);
-            gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), new MoonRider1().getMoonRider1()[0], new MoonRider1().getMoonRider1()[1]);
+            gridPane.add(new ImageView(new Image("File:pic/MoonRider.png")), new MoonRider1().getMoonRider1For2()[0], new MoonRider1().getMoonRider1For2()[1]);
         });
 
         for (int i = 0; i != 8; i++) {
