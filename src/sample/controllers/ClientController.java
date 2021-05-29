@@ -174,6 +174,11 @@ public class ClientController {
         });
 
         updateButton.setOnAction(actionEvent -> {
+            for (int i = 0; i != 8; i++) {
+                for (int j = 0; j != 8; j++) {
+                    gridPane.add(new ImageView(new Image("File:pic/Moon.png")), i, j);
+                }
+            }
             try (FileReader fr = new FileReader("saves\\wallsInfo.txt")) {
                 // читаем посимвольно
                 BufferedReader reader = new BufferedReader(fr);
