@@ -143,12 +143,7 @@
                     </children>
                 </GridPane>
                 <TextField fx:id="textFieldPoints" layoutX="533.0" layoutY="66.0" prefHeight="25.0" prefWidth="42.0" />
-            <Button fx:id="updateButton" layoutX="423.0" layoutY="328.0" mnemonicParsing="false" text="Обновить">
-               <font>
-                  <Font name="MT Extra" size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="writeButton" layoutX="564.0" layoutY="328.0" mnemonicParsing="false" text="Записать">
+            <Button fx:id="updateButton" layoutX="496.0" layoutY="328.0" mnemonicParsing="false" text="Обновить">
                <font>
                   <Font name="MT Extra" size="20.0" />
                </font>

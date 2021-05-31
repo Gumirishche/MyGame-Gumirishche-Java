@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import sample.Main;
+import sample.actions.Queue;
 import sample.events.Walls;
 import sample.moonRiders.MoonRider1;
 import sample.moonRiders.MoonRider2;
@@ -35,6 +36,7 @@ public class HostOrClientController {
     @FXML
     void initialize() {
        hostButton.setOnAction(actionEvent -> {
+           new Queue().queue();
            new Walls().wallsPosition();
            new MoonRider1().defaultMoonRider1();
            client=1;
