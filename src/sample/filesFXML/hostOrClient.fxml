@@ -7,19 +7,39 @@
 
 <AnchorPane prefHeight="327.0" prefWidth="480.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.HostOrClientController">
    <children>
-      <Button fx:id="hostButton" layoutX="52.0" layoutY="145.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="155.0" text="Хост">
+      <Button fx:id="hostButton" layoutX="64.0" layoutY="95.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="155.0" text="Хост">
          <font>
             <Font name="MT Extra" size="33.0" />
          </font>
       </Button>
-      <Button fx:id="clientButton" layoutX="261.0" layoutY="145.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="155.0" text="Клиент">
+      <Button fx:id="clientButton" layoutX="261.0" layoutY="95.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="155.0" text="Клиент">
          <font>
             <Font name="MT Extra" size="33.0" />
          </font>
       </Button>
-      <Label layoutX="157.0" layoutY="80.0" text="Выберите" textFill="WHITE">
+      <Label layoutX="157.0" text="Выберите" textFill="WHITE">
          <font>
             <Font name="MT Extra" size="37.0" />
+         </font>
+      </Label>
+      <Button fx:id="hostButton1" layoutX="64.0" layoutY="231.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="155.0" text="Хост">
+         <font>
+            <Font name="MT Extra" size="33.0" />
+         </font>
+      </Button>
+      <Button fx:id="clientButton1" layoutX="261.0" layoutY="231.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="155.0" text="Клиент">
+         <font>
+            <Font name="MT Extra" size="33.0" />
+         </font>
+      </Button>
+      <Label layoutX="219.0" layoutY="53.0" text=".txt" textFill="WHITE">
+         <font>
+            <Font name="MT Extra" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="219.0" layoutY="183.0" text=".json" textFill="WHITE">
+         <font>
+            <Font name="MT Extra" size="28.0" />
          </font>
       </Label>
    </children>

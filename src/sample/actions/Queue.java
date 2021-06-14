@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Queue {
     private int queue;
-    public void queue(){
+    public void Queue(){
         queue=(int) (Math.random() * 2 + 1);
         try(FileWriter writer = new FileWriter("saves\\queue.txt", false))
         {

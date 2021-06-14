@@ -1,6 +1,7 @@
 package sample.events;
 
 import sample.controllers.Controller;
+import sample.instruments.JsonWriter1;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -32,6 +33,7 @@ public class Walls {
         catch(IOException ex){
             System.out.println(ex.getMessage());
         }
+        new JsonWriter1("wallsInfo1");
     }
 
     public boolean canGo(int y, int x) {

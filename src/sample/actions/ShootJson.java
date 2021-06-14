@@ -5,16 +5,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import sample.controllers.ClientController;
-import sample.controllers.Controller;
-import sample.controllers.HostOrClientController;
+import sample.controllers.*;
 import sample.instruments.JsonReader1;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Shoot {
+public class ShootJson {
     String[] rider1S=new String[2], rider2S=new String[2];
     public static Stage stage = new Stage();
     GridPane gridPane;
@@ -23,12 +21,12 @@ public class Shoot {
     public void shootDirection() {
         System.out.print("Shoot");
         if (HostOrClientController.client == 1) {
-            Controller.d = 1;
+            ControllerJson.d = 1;
         } else {
-            ClientController.d = 1;
+            ClientControllerJson.d = 1;
         }
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/sample/filesFXML/direction.fxml"));
+        loader.setLocation(getClass().getResource("/sample/filesFXML/directionJson.fxml"));
 
         try {
             loader.load();
@@ -45,7 +43,7 @@ public class Shoot {
     }
 
     public boolean win1(int y, int x) {
-        try (FileReader fr = new FileReader("saves\\moonRider2Info.txt")) {
+        try (FileReader fr = new FileReader("saves\\moonRider2Info1.txt")) {
             // читаем посимвольно
             BufferedReader reader = new BufferedReader(fr);
             rider2S = reader.readLine().split(",");
@@ -62,7 +60,7 @@ public class Shoot {
     }
 
     public boolean win2(int y, int x) {
-        try (FileReader fr = new FileReader("saved\\moonRider1Info.txt")) {
+        try (FileReader fr = new FileReader("saved\\moonRider1Info2.txt")) {
             // читаем посимвольно
             BufferedReader reader = new BufferedReader(fr);
             rider1S = reader.readLine().split(",");
