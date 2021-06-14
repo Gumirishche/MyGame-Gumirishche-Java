@@ -1,23 +1,12 @@
 package sample.controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
-import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 import sample.actions.Move;
 import sample.actions.Shoot;
 
 public class ControllerDirection {
     public static String direction = "";
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Button DirectionUpButton;
@@ -33,9 +22,6 @@ public class ControllerDirection {
 
     @FXML
     private Button DirectionBackButton;
-
-    @FXML
-    private static Group group;
 
     @FXML
     void initialize() {

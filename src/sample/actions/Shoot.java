@@ -3,22 +3,17 @@ package sample.actions;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import sample.controllers.ClientController;
 import sample.controllers.Controller;
 import sample.controllers.HostOrClientController;
-import sample.instruments.JsonReader1;
 
 import javax.swing.*;
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class Shoot {
-    String[] rider1S=new String[2], rider2S=new String[2];
+    String[] rider1S = new String[2], rider2S = new String[2];
     public static Stage stage = new Stage();
-    GridPane gridPane;
     boolean win;
 
     public void shootDirection() {
@@ -53,7 +48,7 @@ public class Shoot {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        if (y == Integer.parseInt(rider2S[1]) && x==Integer.parseInt(rider2S[0])) {
+        if (y == Integer.parseInt(rider2S[1]) && x == Integer.parseInt(rider2S[0])) {
             JOptionPane.showMessageDialog(new JDialog(), "Вы победили");
             System.out.println("WIN 1 PLAYER");
             win = true;
@@ -71,7 +66,7 @@ public class Shoot {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        if (y == Integer.parseInt(rider1S[1]) && x==Integer.parseInt(rider1S[0])) {
+        if (y == Integer.parseInt(rider1S[1]) && x == Integer.parseInt(rider1S[0])) {
             JOptionPane.showMessageDialog(new JDialog(), "Вы победили");
             System.out.println("WIN 2 PLAYER");
             win = true;

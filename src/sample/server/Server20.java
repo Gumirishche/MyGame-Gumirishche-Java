@@ -21,7 +21,7 @@ public class Server20 {
                 var thread = new Handler(socket, this.directory);
                 thread.start();
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

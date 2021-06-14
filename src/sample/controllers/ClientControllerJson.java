@@ -5,13 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,32 +15,19 @@ import sample.actions.MoveJson;
 import sample.actions.ShootJson;
 import sample.events.Points;
 import sample.events.Walls;
-import sample.actions.Move;
-import sample.actions.Shoot;
-import sample.instruments.JsonReader1;
 import sample.instruments.JsonReader2;
 import sample.instruments.JsonWriter2;
-import sample.moonRiders.MoonRider1;
 import sample.moonRiders.MoonRider1Json;
-import sample.moonRiders.MoonRider2;
 import sample.moonRiders.MoonRider2Json;
-import sample.server.Server20;
-
-import javax.swing.*;
 
 public class ClientControllerJson {
     public static int d = 0;
-    public String direction = "", queue;
+    public String queue;
     public static Stage stage = new Stage();
     int[][] walls = new int[14][2];
     public static Cell moonRider2 = Cell.A8;
     String[][] wallsInfo = new String[14][2];
     String[] lineWalls = new String[14];
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Button ShootButton;
@@ -81,7 +62,6 @@ public class ClientControllerJson {
         });
         goButton.setOnAction(actionEvent -> {
             try (FileReader fr = new FileReader("saved\\queue2.txt")) {
-                // читаем посимвольно
                 BufferedReader reader = new BufferedReader(fr);
                 queue = reader.readLine();
             } catch (IOException ex) {
@@ -132,7 +112,6 @@ public class ClientControllerJson {
                     textFieldPoints.setText(String.valueOf(new Points().getPoints()));
                     d = 0;
                 } else if (d == 2) {
-                    this.direction = direction;
                     if (ControllerDirectionJson.direction.equals("up")) {
                         if (new Walls().canGo(moonRider2.x - 1, moonRider2.y)) {
                         } else {
@@ -177,12 +156,10 @@ public class ClientControllerJson {
                     d = 0;
                     new MoonRider2Json().setMoonRider2(moonRider2.y, moonRider2.x);
                 }
-                try(FileWriter writer = new FileWriter("saved\\queue2.txt", false))
-                {
-                    writer.write(String.valueOf(Integer.parseInt(queue)+1));
+                try (FileWriter writer = new FileWriter("saved\\queue2.txt", false)) {
+                    writer.write(String.valueOf(Integer.parseInt(queue) + 1));
                     writer.flush();
-                }
-                catch(IOException ex){
+                } catch (IOException ex) {
                     System.out.println(ex.getMessage());
                 }
                 new JsonWriter2("queue2");
@@ -190,15 +167,14 @@ public class ClientControllerJson {
         });
 
         updateButton.setOnAction(actionEvent -> {
-            new JsonReader2("queue1","192.168.0.194","4321");
-            new JsonReader2("wallsInfo1","192.168.0.194","4321");
+            new JsonReader2("queue1", "192.168.0.194", "4321");
+            new JsonReader2("wallsInfo1", "192.168.0.194", "4321");
             for (int i = 0; i != 8; i++) {
                 for (int j = 0; j != 8; j++) {
                     gridPane.add(new ImageView(new Image("File:pic/Moon.png")), i, j);
                 }
             }
             try (FileReader fr = new FileReader("saved\\wallsInfo2.txt")) {
-                // читаем посимвольно
                 BufferedReader reader = new BufferedReader(fr);
                 lineWalls = reader.readLine().split(" ");
             } catch (IOException ex) {

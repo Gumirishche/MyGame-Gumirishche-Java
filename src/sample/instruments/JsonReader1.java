@@ -3,17 +3,16 @@ package sample.instruments;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Arrays;
 
 public class JsonReader1 {
     public String memory;
-    public String fileN="";
+    public String fileN = "";
 
     public JsonReader1(String file, String ip, String port) {
         char[] file2 = file.toCharArray();
-        file2[file2.length-1]='1';
+        file2[file2.length - 1] = '1';
         for (int i = 0; i < file2.length; i++) {
-            fileN= fileN + file2[i];
+            fileN = fileN + file2[i];
         }
         try {
             URL url = new URL("http://" + ip + ":" + port + "/" + file + ".json");
@@ -26,8 +25,8 @@ public class JsonReader1 {
             byte[] b = new byte[1024];
             int count = 0;
 
-            while ((count=bis.read(b)) != -1)
-                fw.write(b,0,count);
+            while ((count = bis.read(b)) != -1)
+                fw.write(b, 0, count);
 
             fw.close();
         } catch (IOException ex) {
@@ -54,12 +53,10 @@ public class JsonReader1 {
 
         System.out.println("memory:" + memory);
 
-        try(FileWriter writer = new FileWriter("saves\\" + fileN + ".txt", false))
-        {
+        try (FileWriter writer = new FileWriter("saves\\" + fileN + ".txt", false)) {
             writer.write(memory);
             writer.flush();
-        }
-        catch(IOException ex){
+        } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
 

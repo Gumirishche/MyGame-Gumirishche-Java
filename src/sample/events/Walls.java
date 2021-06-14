@@ -1,6 +1,5 @@
 package sample.events;
 
-import sample.controllers.Controller;
 import sample.instruments.JsonWriter1;
 
 import java.io.BufferedReader;
@@ -24,7 +23,6 @@ public class Walls {
         }
         try(FileWriter writer = new FileWriter("saves\\wallsInfo1.txt", false))
         {
-            // запись всей строки
             for(int i=0;i<14;i++){
                 writer.write(wallsInfo[i][0]+","+wallsInfo[i][1]+" ");
                 writer.flush();
@@ -38,7 +36,6 @@ public class Walls {
 
     public boolean canGo(int y, int x) {
         try (FileReader fr = new FileReader("saves\\wallsInfo1.txt")) {
-            // читаем посимвольно
             BufferedReader reader = new BufferedReader(fr);
             lineWalls = reader.readLine().split(" ");
         } catch (IOException ex) {
@@ -94,7 +91,6 @@ public class Walls {
     public void writeWalls(String[][] wallsInfo){
         try(FileWriter writer = new FileWriter("saves\\wallsInfo1.txt", false))
         {
-            // запись всей строки
             for(int i=0;i<14;i++){
                 writer.write(wallsInfo[i][0]+","+wallsInfo[i][1]+" ");
                 writer.flush();

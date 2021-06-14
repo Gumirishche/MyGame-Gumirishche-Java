@@ -6,13 +6,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class JsonWriter1 {
-    private  String number = "";
+    private String number = "";
 
-    public JsonWriter1(String file){
+    public JsonWriter1(String file) {
 
-        try(FileReader fr = new FileReader("saves\\" + file + ".txt"))
-        {
-            // читаем посимвольно
+        try (FileReader fr = new FileReader("saves\\" + file + ".txt")) {
             BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
             number = line;
@@ -20,17 +18,14 @@ public class JsonWriter1 {
             ioException.printStackTrace();
         }
 
-        try(
-                FileWriter writer = new FileWriter("saves\\" + file + ".json", false))
-        {
-            // запись всей строки
+        try (
+                FileWriter writer = new FileWriter("saves\\" + file + ".json", false)) {
             final char dm = (char) 34;
             writer.write("{\n");
             writer.write(dm + "playerOne" + dm + " : " + number + "\n");
             writer.write("}");
             writer.flush();
-        }
-        catch(IOException ex){
+        } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
     }

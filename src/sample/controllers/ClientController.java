@@ -5,42 +5,29 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import sample.Cell;
-import sample.actions.ShootJson;
 import sample.events.Points;
 import sample.events.Walls;
 import sample.actions.Move;
 import sample.actions.Shoot;
 import sample.moonRiders.MoonRider1;
 import sample.moonRiders.MoonRider2;
-import sample.server.Server20;
-
-import javax.swing.*;
 
 public class ClientController {
     public static int d = 0;
-    public String direction = "", queue;
+    public String queue;
     public static Stage stage = new Stage();
     int[][] walls = new int[14][2];
     public static Cell moonRider2 = Cell.A8;
     String[][] wallsInfo = new String[14][2];
     String[] lineWalls = new String[14];
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Button ShootButton;
@@ -75,7 +62,6 @@ public class ClientController {
         });
         goButton.setOnAction(actionEvent -> {
             try (FileReader fr = new FileReader("saved\\queue.txt")) {
-                // читаем посимвольно
                 BufferedReader reader = new BufferedReader(fr);
                 queue = reader.readLine();
             } catch (IOException ex) {
@@ -126,7 +112,6 @@ public class ClientController {
                     textFieldPoints.setText(String.valueOf(new Points().getPoints()));
                     d = 0;
                 } else if (d == 2) {
-                    this.direction = direction;
                     if (ControllerDirection.direction.equals("up")) {
                         if (new Walls().canGo(moonRider2.x - 1, moonRider2.y)) {
                         } else {
@@ -224,7 +209,6 @@ public class ClientController {
                 }
             }
             try (FileReader fr = new FileReader("saved\\wallsInfo2.txt")) {
-                // читаем посимвольно
                 BufferedReader reader = new BufferedReader(fr);
                 lineWalls = reader.readLine().split(" ");
             } catch (IOException ex) {

@@ -2,8 +2,7 @@ package sample.controllers;
 
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,13 +12,7 @@ import javafx.stage.Stage;
 import sample.Main;
 
 public class MainWindowController {
-    public static Stage stage=new Stage();
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
+    public static Stage stage = new Stage();
 
     @FXML
     private Button playButton;
