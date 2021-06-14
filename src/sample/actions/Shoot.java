@@ -10,6 +10,7 @@ import sample.controllers.Controller;
 import sample.controllers.HostOrClientController;
 import sample.instruments.JsonReader1;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -53,6 +54,7 @@ public class Shoot {
             System.out.println(ex.getMessage());
         }
         if (y == Integer.parseInt(rider2S[1]) && x==Integer.parseInt(rider2S[0])) {
+            JOptionPane.showMessageDialog(new JDialog(), "Вы победили");
             System.out.println("WIN 1 PLAYER");
             win = true;
         } else {
@@ -70,6 +72,7 @@ public class Shoot {
             System.out.println(ex.getMessage());
         }
         if (y == Integer.parseInt(rider1S[1]) && x==Integer.parseInt(rider1S[0])) {
+            JOptionPane.showMessageDialog(new JDialog(), "Вы победили");
             System.out.println("WIN 2 PLAYER");
             win = true;
         } else {

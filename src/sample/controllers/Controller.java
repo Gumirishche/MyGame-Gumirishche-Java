@@ -34,8 +34,6 @@ public class Controller {
     public static Stage stage = new Stage();
     public static int[][] walls = new int[14][2];
     public Cell moonRider1 = Cell.R1;
-    private int end, port = 0;
-    String inform;
     public static String[][] wallsInfo = new String[14][2];
     String[] lineWalls = new String[14];
     @FXML

@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import sample.Cell;
+import sample.actions.ShootJson;
 import sample.events.Points;
 import sample.events.Walls;
 import sample.actions.Move;
@@ -33,7 +34,6 @@ public class ClientController {
     public static Stage stage = new Stage();
     int[][] walls = new int[14][2];
     public static Cell moonRider2 = Cell.A8;
-    private int end, port;
     String[][] wallsInfo = new String[14][2];
     String[] lineWalls = new String[14];
     @FXML
@@ -87,11 +87,9 @@ public class ClientController {
                         for (int i = 0; i < moonRider2.x; i++) {
                             if (new Walls().canShoot((moonRider2.x - 1) - i, moonRider2.y) || new Shoot().win2((moonRider2.x - 1) - i, moonRider2.y)) {
                                 gridPane.add(new ImageView(new Image("File:pic/Shot.png")), moonRider2.y, (moonRider2.x - 1) - i);
-                                end = (moonRider2.x - 1) - i;
                                 break;
                             } else {
                                 gridPane.add(new ImageView(new Image("File:pic/Shot.png")), moonRider2.y, (moonRider2.x - 1) - i);
-                                end = (moonRider2.x - 1) - i;
                             }
                         }
                     }
@@ -173,12 +171,10 @@ public class ClientController {
                     d = 0;
                     new MoonRider2().setMoonRider2(moonRider2.y, moonRider2.x);
                 }
-                try(FileWriter writer = new FileWriter("saved\\queue.txt", false))
-                {
-                    writer.write(String.valueOf(Integer.parseInt(queue)+1));
+                try (FileWriter writer = new FileWriter("saved\\queue.txt", false)) {
+                    writer.write(String.valueOf(Integer.parseInt(queue) + 1));
                     writer.flush();
-                }
-                catch(IOException ex){
+                } catch (IOException ex) {
                     System.out.println(ex.getMessage());
                 }
             }

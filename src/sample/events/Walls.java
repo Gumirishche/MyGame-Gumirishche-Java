@@ -103,5 +103,6 @@ public class Walls {
         catch(IOException ex){
             System.out.println(ex.getMessage());
         }
+        new JsonWriter1("wallsInfo1");
     }
 }

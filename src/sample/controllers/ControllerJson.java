@@ -39,8 +39,6 @@ public class ControllerJson {
     public static Stage stage = new Stage();
     public static int[][] walls = new int[14][2];
     public Cell moonRider1 = Cell.R1;
-    private int end, port = 0;
-    String inform;
     public static String[][] wallsInfo = new String[14][2];
     String[] lineWalls = new String[14];
     @FXML
@@ -82,7 +80,6 @@ public class ControllerJson {
             new MoveJson().moveDirection();
         });
         goButton.setOnAction(actionEvent -> {
-            System.out.println("herhe");
             try (FileReader fr = new FileReader("saves\\queue1.txt")) {
                 // читаем посимвольно
                 BufferedReader reader = new BufferedReader(fr);
@@ -92,10 +89,10 @@ public class ControllerJson {
             }
             if (Integer.parseInt(queue) % 2 != 0) {
                 if (d == 1) {
-                    new JsonReader1("wallsInfo2","192.168.0.194","1234");
+                    new JsonReader1("wallsInfo2", "192.168.0.194", "1234");
                     if (ControllerDirectionJson.direction.equals("up")) {
                         for (int i = 0; i < moonRider1.x; i++) {
-                            if (new Walls().canShoot((moonRider1.x - 1) - i, moonRider1.y) || new Shoot().win1((moonRider1.x - 1) - i, moonRider1.y)) {
+                            if (new Walls().canShoot((moonRider1.x - 1) - i, moonRider1.y) || new ShootJson().win1((moonRider1.x - 1) - i, moonRider1.y)) {
                                 gridPane.add(new ImageView(new Image("File:pic/Shot.png")), moonRider1.y, (moonRider1.x - 1) - i);
                                 break;
                             } else {
@@ -105,7 +102,7 @@ public class ControllerJson {
                     }
                     if (ControllerDirectionJson.direction.equals("down")) {
                         for (int i = 0; i < 7 - moonRider1.x; i++) {
-                            if (new Walls().canShoot((moonRider1.x + 1) + i, moonRider1.y) || new Shoot().win1((moonRider1.x + 1) + i, moonRider1.y)) {
+                            if (new Walls().canShoot((moonRider1.x + 1) + i, moonRider1.y) || new ShootJson().win1((moonRider1.x + 1) + i, moonRider1.y)) {
                                 gridPane.add(new ImageView(new Image("File:pic/Shot.png")), moonRider1.y, (moonRider1.x + 1) + i);
                                 break;
                             } else {
@@ -115,7 +112,7 @@ public class ControllerJson {
                     }
                     if (ControllerDirectionJson.direction.equals("left")) {
                         for (int i = 0; i < moonRider1.y; i++) {
-                            if (new Walls().canShoot(moonRider1.x, (moonRider1.y - 1) - i) || new Shoot().win1(moonRider1.x, (moonRider1.y - 1) - i)) {
+                            if (new Walls().canShoot(moonRider1.x, (moonRider1.y - 1) - i) || new ShootJson().win1(moonRider1.x, (moonRider1.y - 1) - i)) {
                                 gridPane.add(new ImageView(new Image("File:pic/Shot.png")), (moonRider1.y - 1) - i, moonRider1.x);
                                 break;
                             } else {
@@ -125,7 +122,7 @@ public class ControllerJson {
                     }
                     if (ControllerDirectionJson.direction.equals("right")) {
                         for (int i = 0; i < 7 - moonRider1.y; i++) {
-                            if (new Walls().canShoot(moonRider1.x, (moonRider1.y + 1) + i) || new Shoot().win1(moonRider1.x, (moonRider1.y + 1) + i)) {
+                            if (new Walls().canShoot(moonRider1.x, (moonRider1.y + 1) + i) || new ShootJson().win1(moonRider1.x, (moonRider1.y + 1) + i)) {
                                 gridPane.add(new ImageView(new Image("File:pic/Shot.png")), (moonRider1.y + 1) + i, moonRider1.x);
                                 break;
                             } else {
@@ -180,14 +177,12 @@ public class ControllerJson {
                     textFieldPoints.setText(String.valueOf(new Points().getPoints()));
                     d = 0;
                     new MoonRider1Json().setMoonRider1(moonRider1.y, moonRider1.x);
-                    new JsonReader1("wallsInfo2","192.168.0.194","1234");
+                    new JsonReader1("wallsInfo2", "192.168.0.194", "1234");
                 }
-                try(FileWriter writer = new FileWriter("saves\\queue1.txt", false))
-                {
-                    writer.write(String.valueOf(Integer.parseInt(queue)+1));
+                try (FileWriter writer = new FileWriter("saves\\queue1.txt", false)) {
+                    writer.write(String.valueOf(Integer.parseInt(queue) + 1));
                     writer.flush();
-                }
-                catch(IOException ex){
+                } catch (IOException ex) {
                     System.out.println(ex.getMessage());
                 }
                 new JsonWriter1("queue1");
@@ -195,7 +190,7 @@ public class ControllerJson {
         });
 
         updateButton.setOnAction(actionEvent -> {
-            new JsonReader1("queue2","192.168.0.194","1234");
+            new JsonReader1("queue2", "192.168.0.194", "1234");
             for (int i = 0; i != 8; i++) {
                 for (int j = 0; j != 8; j++) {
                     gridPane.add(new ImageView(new Image("File:pic/Moon.png")), i, j);
